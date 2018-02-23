@@ -1,9 +1,34 @@
-var col1 = document.querySelector("#column1");
+var columns = document.querySelectorAll(".column");
 
-col1.onclick = function () {
-    var redDisc = document.createElement("div");
+player1 = true;
+player2 = false;
+
+let columnPos = [0,0,0,0,0,0,0,0]
+
+const getToken = function (event) {
+    let destination = this;
+    let redDisc = document.createElement("div");
+    let blackDisc = document.createElement("div");
+    blackDisc.className = "gray";
     redDisc.className = "red";
-    var destination = document.getElementById("column1");
-    destination.appendChild(redDisc);
 
+    columnPos[columns.id]++;
+
+    if (player1 === true) {
+        destination.appendChild(redDisc);
+        player1 = false;
+        player2 = true;
+        console.log(player2);
+    }
+    else {
+        destination.appendChild(blackDisc);
+        player1 = true;
+        player2 = false;
+    }
+
+}
+
+for (let i=0; i < columns.length; i++) {
+    let column = columns[i];
+    column.onclick = getToken;
 }
